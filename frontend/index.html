@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader | Multi-Chunk Fast Downloads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo">Video Downloader</h1>
+            <p class="tagline">Multi-chunk downloads with aria2c • Real-time progress • No limits</p>
+        </header>
+
+        <div id="errorMessage" class="error-message hidden"></div>
+
+        <div class="card">
+            <div class="input-group">
+                <label for="urlInput">Video URL</label>
+                <input 
+                    type="text" 
+                    id="urlInput" 
+                    class="url-input" 
+                    placeholder="Paste YouTube, Vimeo, Dailymotion URL..."
+                    autocomplete="off"
+                >
+            </div>
+            
+            <button id="getInfoBtn" class="btn btn-primary" disabled>
+                Get Video Info
+            </button>
+
+            <div id="videoPreview" class="video-preview">
+                <div class="preview-grid">
+                    <img id="videoThumbnail" class="thumbnail" src="" alt="Video thumbnail">
+                    <div class="video-info">
+                        <h3 id="videoTitle">Video Title</h3>
+                        <div class="video-meta">
+                            <span>Duration: <strong id="videoDuration">--:--</strong></span>
+                            <span>Size: <strong id="videoSize">--</strong></span>
+                        </div>
+                        <div class="format-select">
+                            <label for="formatSelect">Quality / Format</label>
+                            <select id="formatSelect">
+                                <option value="bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best">
+                                    Best Video + Audio (MP4)
+                                </option>
+                                <option value="best[ext=mp4]/best">
+                                    Best Available (MP4)
+                                </option>
+                                <option value="best">
+                                    Best Quality
+                                </option>
+                                <option value="bestaudio">
+                                    Audio Only (MP3)
+                                </option>
+                            </select>
+                        </div>
+                        <button id="downloadBtn" class="btn btn-primary download-btn">
+                            Download Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="progressSection" class="card">
+            <div class="progress-header">
+                <span id="progressStatus" class="progress-status">No active download</span>
+                <span id="progressPercent" class="progress-percent">0%</span>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+            </div>
+            
+            <div class="progress-details">
+                <div class="detail-item">
+                    <div class="detail-label">SPEED</div>
+                    <div id="progressSpeed" class="detail-value">--</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">SIZE</div>
+                    <div id="progressTotal" class="detail-value">--</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">ETA</div>
+                    <div id="progressEta" class="detail-value">--</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">FILE</div>
+                    <div id="progressFilename" class="detail-value">--</div>
+                </div>
+            </div>
+            
+            <div class="log-console" id="logConsole">
+                <div class="log-entry info">Waiting for download...</div>
+            </div>
+        </div>
+
+        <div class="card files-section">
+            <h2 class="section-title">
+                Downloads
+                <button id="refreshFilesBtn" class="btn btn-sm" style="margin-left: auto; background: var(--glass);">
+                    ↻ Refresh
+                </button>
+            </h2>
+            <div id="filesList" class="files-list"></div>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
